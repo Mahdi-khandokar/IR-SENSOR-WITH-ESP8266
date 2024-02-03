@@ -1,7 +1,5 @@
 IR SENSOR WITH ESP8266
-
 Certainly! Below is a simple example of an ESP8266 program using an IR sensor. This example assumes you are using the Arduino IDE with the ESP8266 board support installed. Additionally, you'll need an IR sensor module (like the TSOP382) and the IRremoteESP8266 library. You can install the IRremoteESP8266 library from the Arduino Library Manager.
-
 start..............
 #include <IRremoteESP8266.h>
 #include <IRrecv.h>
