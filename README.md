@@ -1,2 +1,78 @@
-# IR-SENSOR-WITH-ESP8266
 IR SENSOR WITH ESP8266
+
+Certainly! Below is a simple example of an ESP8266 program using an IR sensor. This example assumes you are using the Arduino IDE with the ESP8266 board support installed. Additionally, you'll need an IR sensor module (like the TSOP382) and the IRremoteESP8266 library. You can install the IRremoteESP8266 library from the Arduino Library Manager.
+
+start..............
+#include <IRremoteESP8266.h>
+#include <IRrecv.h>
+#include <IRutils.h>
+
+const int IR_PIN = D2;  // Define the pin where the IR sensor is connected
+IRrecv irrecv(IR_PIN);  // Create an IR receiver object
+
+decode_results results;  // Variable to store the IR code
+
+void setup() {
+  Serial.begin(115200);
+  irrecv.enableIRIn();  // Start the IR receiver
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+    // Print the decoded IR code to the serial monitor
+    Serial.print("IR Code: 0x");
+    Serial.println(results.value, HEX);
+
+    // Add your logic here based on the received IR code
+    // For example, you can check specific codes and perform actions
+    if (results.value == 0x20DF10EF) {
+      // Replace 0x20DF10EF with the actual code you want to match
+      Serial.println("Received IR command A");
+      // Add your action here
+    }
+
+    // Reset the IR receiver for the next code
+    irrecv.resume();
+  }
+}
+
+Certainly! Below is a simple example of an ESP8266 program using an IR sensor. This example assumes you are using the Arduino IDE with the ESP8266 board support installed. Additionally, you'll need an IR sensor module (like the TSOP382) and the IRremoteESP8266 library. You can install the IRremoteESP8266 library from the Arduino Library Manager.
+
+```cpp
+#include <IRremoteESP8266.h>
+#include <IRrecv.h>
+#include <IRutils.h>
+
+const int IR_PIN = D2;  // Define the pin where the IR sensor is connected
+IRrecv irrecv(IR_PIN);  // Create an IR receiver object
+
+decode_results results;  // Variable to store the IR code
+
+void setup() {
+  Serial.begin(115200);
+  irrecv.enableIRIn();  // Start the IR receiver
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+    // Print the decoded IR code to the serial monitor
+    Serial.print("IR Code: 0x");
+    Serial.println(results.value, HEX);
+
+    // Add your logic here based on the received IR code
+    // For example, you can check specific codes and perform actions
+    if (results.value == 0x20DF10EF) {
+      // Replace 0x20DF10EF with the actual code you want to match
+      Serial.println("Received IR command A");
+      // Add your action here
+    }
+
+    // Reset the IR receiver for the next code
+    irrecv.resume();
+  }
+}
+```
+
+Make sure to replace the `IR_PIN` with the actual GPIO pin to which your IR sensor is connected. Also, replace the example code `0x20DF10EF` with the actual IR code you want to match for specific actions. You can find the IR codes for your remote control in the Serial Monitor when you press buttons on your remote.
+
+Upload this code to your ESP8266 board, open the Serial Monitor, and observe the output when you press buttons on your IR remote. Adjust the code according to the specific IR codes you want to use and the actions you want to perform based on those codes.
